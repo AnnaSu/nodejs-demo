@@ -1,3 +1,10 @@
+// NODE_ENV 是常用的環境變數
+// 如果不是 production 會載入 dotenv 設定
+// dotenv 會去找根目錄底下的 .env 檔案
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
 const Express = require('express');
 const helmet = require('helmet');
 const serveStatic = require('serve-static');
@@ -31,6 +38,6 @@ app.get('/', function (req, res) {
     res.send('Hello World');
 });
 
-app.listen(process.env.PORT || 3000, function () {
+app.listen(process.env.PORT, function () {
     console.log('start listen http://localhost:3000');
 })
