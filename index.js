@@ -9,6 +9,8 @@ const Express = require('express');
 const helmet = require('helmet');
 const serveStatic = require('serve-static');
 
+const { db } = require('./models');
+
 const app = Express();
 app.use(helmet());
 // 當作靜態檔案輸出，如果沒有，再去找其他的 route
@@ -38,6 +40,8 @@ app.get('/', function (req, res) {
     res.send('Hello World');
 });
 
-app.listen(process.env.PORT, function () {
-    console.log('start listen http://localhost:3000');
-})
+db.sync().then(()=> {
+    app.listen(process.env.PORT, function () {
+        console.log('start listen http://localhost:3000');
+    });
+});
