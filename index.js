@@ -29,12 +29,14 @@ app.get('/home', function (req, res) {
     res.send('Hello Home');
 });
 
-app.get('/user/:id', (req, res) => {
+app.get('/user/:id', async (req, res) => {
     console.log('params:', req.params);
     console.log('id', req.params.id);
-    res.send('user id: ' + req.params.id);
+    // User 是類別
+    // user 是實例
+    const user = await User.findById(req.params.id);
+    res.send(user);
 });
- 
 
 app.get('/create/user', (req, res) => {
     User.create({
