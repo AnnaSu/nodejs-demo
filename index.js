@@ -9,7 +9,7 @@ const Express = require('express');
 const helmet = require('helmet');
 const serveStatic = require('serve-static');
 
-const { db } = require('./models');
+const { db, User } = require('./models');
 
 const app = Express();
 app.use(helmet());
@@ -35,6 +35,18 @@ app.get('/user/:id', (req, res) => {
     res.send('user id: ' + req.params.id);
 });
  
+
+app.get('/create/user', (req, res) => {
+    User.create({
+        email: 'newstory0113@gmail.com',
+        password: '123456',
+        nickname: 'AnnaSu',
+        gender: 2,
+    }).then(user => {
+        res.send(user);
+    });
+})
+
 app.get('/', function (req, res) {
     console.log('Hello');
     res.send('Hello World');
