@@ -1,4 +1,4 @@
-// NODE_ENV 是常用的環境變數
+// NODE_ENV 是 NodeJS 常用的環境變數
 // 如果不是 production 會載入 dotenv 設定
 // dotenv 會去找根目錄底下的 .env 檔案
 if (process.env.NODE_ENV !== 'production') {
