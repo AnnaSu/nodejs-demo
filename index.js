@@ -17,6 +17,7 @@ const app = Express();
 app.set('view engine', 'pug');
 // parse application/json
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 app.use(helmet());
 // 當作靜態檔案輸出，如果沒有，再去找其他的 route
 // localhost:3000/avatar.jpg
