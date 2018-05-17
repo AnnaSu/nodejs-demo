@@ -62,7 +62,9 @@ app.post('/create/post', async (req, res) => {
 
 app.get('/', async function (req, res) {
     console.log('Hello');
-    const posts = await Post.findAll();
+    const posts = await Post.findAll({
+        order: [['createdAt', 'DESC']]
+    });
     // 會去找 views 底下的 index.pug
     res.render('index', { posts: posts });
 });
