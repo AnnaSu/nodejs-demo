@@ -9,7 +9,7 @@ const Express = require('express');
 const helmet = require('helmet');
 const serveStatic = require('serve-static');
 
-const { db, User } = require('./models');
+const { db, User, Post } = require('./models');
 
 const app = Express();
 app.use(helmet());
@@ -48,6 +48,16 @@ app.get('/create/user', (req, res) => {
         res.send(user);
     });
 })
+
+app.get('/create/post', async (req, res) => {
+    const post = await Post.create({
+        title: 'Hello',
+        content: 'Hello World 123',
+        authorId: 1
+    });
+
+    res.send(post);
+});
 
 app.get('/', function (req, res) {
     console.log('Hello');
