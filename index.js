@@ -8,10 +8,14 @@ if (process.env.NODE_ENV !== 'production') {
 const Express = require('express');
 const helmet = require('helmet');
 const serveStatic = require('serve-static');
+const bodyParser = require('body-parser');
 
 const { db, User, Post } = require('./models');
 
 const app = Express();
+
+// parse application/json
+app.use(bodyParser.json());
 app.use(helmet());
 // 當作靜態檔案輸出，如果沒有，再去找其他的 route
 // localhost:3000/avatar.jpg
@@ -62,6 +66,32 @@ app.get('/create/post', async (req, res) => {
 app.get('/', function (req, res) {
     console.log('Hello');
     res.send('Hello World');
+});
+
+app.get('/posts', async (req, res) => {
+    const posts = await Post.findAll();
+    res.send(posts);
+});
+
+app.get('/posts/:id', async (req, res) => {
+    const post = await Post.findById(req.params.id);
+    if (post) {
+        res.send(post);
+    } else {
+        res.status(404).end();
+    }
+})
+
+app.post('/posts', async (req, res) => {
+    const post = await Post.create(req.body);
+    res.status(201).send(post);
+});
+
+app.delete('/posts/:id', async (req, res) => {
+    await Post.destroy({
+        where: { id: req.params.id }
+    });
+    res.status(204).end();
 });
 
 db.sync().then(()=> {
