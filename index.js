@@ -55,14 +55,9 @@ app.get('/create/user', (req, res) => {
     });
 })
 
-app.get('/create/post', async (req, res) => {
-    const post = await Post.create({
-        title: 'Hello',
-        content: 'Hello World 123',
-        authorId: 1
-    });
-
-    res.send(post);
+app.post('/create/post', async (req, res) => {
+    await Post.create(req.body);
+    res.redirect('/');
 });
 
 app.get('/', async function (req, res) {
