@@ -69,8 +69,17 @@ app.get('/', function (req, res) {
 });
 
 app.get('/posts', async (req, res) => {
-    const posts = await Post.findAll();
-    res.send(posts);
+    const limit = req.query.limit || 5;
+    const page = req.query.page || 1;
+    const posts = await Post.findAndCountAll({
+        limit: limit,
+        offset: limit * (page - 1)
+    });
+
+    res.send(Object.assign(posts, {
+        page: page,
+        totalPage: Math.ceil(posts.count / limit),
+    }));
 });
 
 app.get('/posts/:id', async (req, res) => {
