@@ -31,13 +31,14 @@ html(lang="en")
                                     label(for='content') Message
                                     textarea#content.form-control(placeholder='Type in your message', rows='3', name='content')
                                 button.btn.btn-primary(type='submit') Post New Message
+        each post in posts                        
             .row.justify-content-md-center
                 .col.col-ms-12.col-md-10.col-lg-8.col-xl-6
                     .card.border-primary
                         .card-body
-                            h4.card-title 陋室銘 😉
-                            p.card-text
-                            span.text-primary 山不在高，有仙則名；水💧不在深，有龍 🐉則靈。斯是陋室，惟吾德馨詞解。苔痕上階綠，草🌱色入簾青；談笑有鴻儒詞解，往來無白丁詞解。可以調素琴詞解，閱金經；無絲竹之亂耳，無案牘詞解之勞形詞解。南陽諸葛廬詞解，西蜀子雲亭詞解。孔子云：「何陋之有詞解？」
+                            h4.card-title= post.title
+                            p.card-text= post.content
+                            span.text-primary 5月6日
         block content           
         script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js', integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo', crossorigin='anonymous')
         script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js', integrity='sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49', crossorigin='anonymous')

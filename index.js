@@ -64,9 +64,11 @@ app.get('/create/post', async (req, res) => {
     res.send(post);
 });
 
-app.get('/', function (req, res) {
+app.get('/', async function (req, res) {
     console.log('Hello');
-    res.send('Hello World');
+    const posts = await Post.findAll();
+    // 會去找 views 底下的 index.pug
+    res.render('index', { posts: posts });
 });
 
 app.get('/about', function (req, res) {
