@@ -14,6 +14,7 @@ const { db, User, Post } = require('./models');
 
 const app = Express();
 
+app.set('view engine', 'pug');
 // parse application/json
 app.use(bodyParser.json());
 app.use(helmet());
@@ -67,6 +68,10 @@ app.get('/', function (req, res) {
     console.log('Hello');
     res.send('Hello World');
 });
+
+app.get('/about', function (req, res) {
+    res.render('about');
+})
 
 app.get('/posts', async (req, res) => {
     const limit = req.query.limit || 5;
